@@ -1,4 +1,4 @@
-using LoansIssuance.Services;
+using Instant.Services;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);

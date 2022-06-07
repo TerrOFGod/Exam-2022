@@ -1,5 +1,5 @@
-﻿using Instant.Dto;
-using LoansIssuance.Services;
+﻿using Instant.Entities;
+using Instant.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoansIssuance.Controllers;

@@ -1,4 +1,4 @@
-﻿namespace LoansIssuance.Enums;
+﻿namespace Instant.Enums;
 
 public enum DepositEnum
 {

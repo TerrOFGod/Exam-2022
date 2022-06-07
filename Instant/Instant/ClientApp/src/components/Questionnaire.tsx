@@ -101,9 +101,9 @@ export function Questionnaire() {
                                    maxLength={PatronymicMaxLength}
                                    onChange={(e) => setPatronymic(e.target.value)}/>
                         </div>
-                        <div>
+                        <div className='mt-2 w-33'>
                             <label>Employment</label>
-                            <select className="w-25 mb-3"
+                            <select  className='border rounded ms-2 p-1'
                                     onChange={(e) => {
                                         let value = Number.parseInt(e.target.value);
                                         switch (value) {
@@ -131,9 +131,9 @@ export function Questionnaire() {
                                 <option value="4">Unemployed</option>
                             </select> 
                         </div>
-                        <div>
+                        <div className='mt-2 w-33'>
                             <label>Age:</label>
-                            <input className="w-25 mb-3"
+                            <input className='border rounded ms-2 p-1'
                                    value={adult}
                                    maxLength={3}
                                    onChange={(e) => {
@@ -149,9 +149,9 @@ export function Questionnaire() {
 
                 <h4 className='h4'>Personality</h4>    
                     <div id='passport' className='row m-0'>
-                        <div>
+                        <div className='mt-2 w-33'>
                             <label>Series:</label>
-                            <input className="w-25 mb-3"
+                            <input  className='border rounded ms-2 p-1'
                                    value={passportSeries}
                                    maxLength={PassportSeriesLength}
                                    onChange={(e) => {
@@ -161,9 +161,9 @@ export function Questionnaire() {
                                    }}/>
                         </div>
 
-                        <div>
+                        <div className='mt-2 w-33'>
                             <label>Number:</label>
-                            <input className="w-25 mb-3"
+                            <input className='border rounded ms-2 p-1'
                                    value={passportNumber}
                                    maxLength={PassportNumberLength}
                                    onChange={(e) => {
@@ -172,19 +172,9 @@ export function Questionnaire() {
                                            setPassportNumber(e.target.value)
                                    }}/>
                         </div>
-
-                        <div>
-                            <label>Issued by:</label>
-                            <input className="w-25 mb-3"
-                                   value={passportIssuer}
-                                   minLength={PassportIssuerMinLength}
-                                   maxLength={PassportIssuerMaxLength}
-                                   onChange={(e) => setPassportIssuer(e.target.value)}/>
-                        </div>
-
-                        <div>
+                        <div className='mt-2 w-33'>
                             <label>Issue date:</label>
-                            <input className="w-25 mb-3"
+                            <input className='border rounded ms-2 p-1'
                                    type="date"
                                    value={passportIssueDate.toISOString().split('T')[0]}
                                    min="1900-01-01"
@@ -194,10 +184,19 @@ export function Questionnaire() {
                                            setPassportIssueDate(new Date(e.target.value));
                                    }}/>
                         </div>
-
-                        <div>
+                        
+                        <div className='mt-2'>
+                            <label>Issued by:</label>
+                            <input className='border rounded col-11 ms-2 p-1'
+                                   value={passportIssuer}
+                                   minLength={PassportIssuerMinLength}
+                                   maxLength={PassportIssuerMaxLength}
+                                   onChange={(e) => setPassportIssuer(e.target.value)}/>
+                        </div>
+                        
+                        <div className='mt-2'>
                             <label>Registration:</label>
-                            <input className="w-25 mb-3"
+                            <input className='border rounded col-11 ms-2 p-1'
                                    minLength={PassportRegInformationMinLength}
                                    maxLength={PassportRegInformationMaxLength}
                                    value={passportRegInformation}
@@ -206,10 +205,10 @@ export function Questionnaire() {
                     </div>
                 
                 <h4 className='h4'>Credit info</h4>
-                <div>
-                    <div>
+                <div className='row m-0'>
+                    <div className='mt-2 w-33'>
                         <label>Purpose</label>
-                        <select className="w-25 mb-3"
+                        <select className='border rounded ms-2 p-1'
                                 onChange={(e) => {
                                     let value = Number.parseInt(e.target.value);
                                     switch (value) {
@@ -230,9 +229,9 @@ export function Questionnaire() {
                         </select>
                     </div>
                     
-                    <div>
+                    <div className='mt-2 w-33'>
                         <label>Pledge</label>
-                        <select className="w-25 mb-3"
+                        <select className='border rounded ms-2 p-1'
                                 onChange={(e) => {
                                     let value = Number.parseInt(e.target.value);
                                     switch (value) {
@@ -257,9 +256,9 @@ export function Questionnaire() {
                         </select>
                     </div>
                     
-                    <div>
+                    <div className='mt-2 w-33'>
                         <label>Car age(if car is pledge)</label>
-                        <input className="w-25 mb-3"
+                        <input className='border rounded ms-2 p-1'
                                value={carAge}
                                maxLength={2}
                                onChange={(e) => {
@@ -271,9 +270,9 @@ export function Questionnaire() {
                                }}/>
                     </div>
                     
-                    <div>
+                    <div className='mt-2'>
                         <label>Amount</label>
-                        <input className="w-25 mb-3"
+                        <input className='border rounded p-1'
                                value={amount}
                                maxLength={AmountMax.toString().length}
                                onChange={(e) => {
@@ -287,7 +286,7 @@ export function Questionnaire() {
                     
                 </div>
                     <label>Criminal record:</label>
-                    <select className="w-25 mb-3"
+                    <select className='border rounded ms-2 p-1'
                             onChange={(e) => {
                                 if (e.target.value == "true")
                                     setJudging(true);
@@ -301,21 +300,19 @@ export function Questionnaire() {
                     
 
                     <label>Other credits:</label>
-                    <select className="w-25 mb-3"
+                    <select className='border rounded ms-2 p-1'
                             onChange={(e) => {
                                 if (e.target.value == "true")
                                     setOtherCredits(true);
                                 else
                                     setOtherCredits(false);
                             }}>
-                        <option value="false">Нет</option>
-                        <option value="true">Есть</option>
+                        <option value="false">Hasn't</option>
+                        <option value="true">Has</option>
                     </select>
-
-                    
-
+                
                     <label className="errorLabel">&nbsp;</label>
-                    <button className="mb-3" onClick={submitForm}>Check</button>
+                    <button className="btn btn-primary justify-content-center my-2 col-12" onClick={submitForm}>Check</button>
             </form>
         </div>
     )

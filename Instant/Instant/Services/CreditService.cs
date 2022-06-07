@@ -1,7 +1,7 @@
-﻿using Instant.Dto;
-using LoansIssuance.Enums;
+﻿using Instant.Entities;
+using Instant.Enums;
 
-namespace LoansIssuance.Services;
+namespace Instant.Services;
 
 public class CreditService
 {

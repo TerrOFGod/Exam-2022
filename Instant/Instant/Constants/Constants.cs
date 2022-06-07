@@ -1,4 +1,4 @@
-﻿namespace LoansIssuance.Constants;
+﻿namespace Instant.Constants;
 
 public static class Constants
 {

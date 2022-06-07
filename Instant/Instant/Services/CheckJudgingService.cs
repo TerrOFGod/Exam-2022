@@ -1,6 +1,6 @@
-﻿using LoansIssuance.Enums;
+﻿using Instant.Enums;
 
-namespace LoansIssuance.Services;
+namespace Instant.Services;
 
 public class CheckJudgingService
 {
