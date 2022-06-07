@@ -1,3 +1,4 @@
+using Instant.Interfaces;
 using Instant.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<CreditService>();
-builder.Services.AddScoped<CheckJudgingService>();
+builder.Services.AddScoped<ICriminalChecker, CriminalChecker>();
 
 builder.Services.AddCors(c =>
 {

@@ -1,28 +1,27 @@
 ﻿using Instant.Entities;
 using Instant.Enums;
+using Instant.Interfaces;
 
 namespace Instant.Services;
 
 public class CreditService
 {
-    private readonly CheckJudgingService _checkJudgingService;
+    private readonly ICriminalChecker _criminalChecker;
 
-    public CreditService(CheckJudgingService checkJudgingService)
+    public CreditService(ICriminalChecker criminalChecker)
     {
-        _checkJudgingService = checkJudgingService;
+        _criminalChecker = criminalChecker;
     }
     
-    public string GetCreditResult(Request request)
+    public async Task<string> GetCreditResult(Request request)
     {
-        var isReallyJudged = _checkJudgingService.IsJudged(request.Name, request.Surname, request.Patronymic,
-            request.PassportSeries, request.PassportNumber, request.PassportIssuer, request.PassportIssueDate,
-            request.PassportRegInformation, request.Adult, request.Employment, request.HasOtherCredits);
+        var criminalStatus = await _criminalChecker.CheckAsync(request.IsJudged);
 
         var message = "";
-        if (!request.IsJudged && isReallyJudged)
+        if (!criminalStatus.Succeeded)
         {
-            request.IsJudged = isReallyJudged;
-            message = "Не пытайтесь нас обмануть: наш сервис показал, что вы были судимы. ";
+            request.IsJudged = criminalStatus.Succeeded;
+            message = "Do not try to deceive us: our service showed that you were convicted.";
         }
         
         var result = GetScoredFromAdult(request.Adult, request.Amount, request.Deposit) +
@@ -34,19 +33,19 @@ public class CreditService
                      GetScoresFromAmount(request.Amount);
         return result switch
         {
-            < 80 => $"{message}Вам отказано в кредите, так как ваш кредитный балл равен {result}",
+            < 80 => $"{message}You have been denied a loan because your credit score is {result}",
             >= 80 and < 84 =>
-                $"{message}Вы можете получить кредит с процентной ставкой 30%, так как ваш кредитный балл равен {result}",
+                $"{message}You can get a loan with an interest rate of 30% since your credit score is {result}",
             >= 84 and < 88 =>
-                $"{message}Вы можете получить кредит с процентной ставкой 26%, так как ваш кредитный балл равен {result}",
+                $"{message}You can get a loan with an interest rate of 26% since your credit score is {result}",
             >= 88 and < 92 =>
-                $"{message}Вы можете получить кредит с процентной ставкой 22%, так как ваш кредитный балл равен {result}",
+                $"{message}You can get a loan with an interest rate of 22% since your credit score is {result}",
             >= 92 and < 96 =>
-                $"{message}Вы можете получить кредит с процентной ставкой 19%, так как ваш кредитный балл равен {result}",
+                $"{message}You can get a loan with an interest rate of 19% since your credit score is {result}",
             >= 96 and < 100 =>
-                $"{message}Вы можете получить кредит с процентной ставкой 15%, так как ваш кредитный балл равен {result}",
-            100 => $"Вы можете получить кредит с процентной ставкой 12,5%, так как ваш кредитный балл равен {result}",
-            _ => $"{message}Кредитный балл > 100"
+                $"{message}You can get a loan with an interest rate of 15% since your credit score is {result}",
+            100 => $"You can get a loan with an interest rate of 12.5% since your credit score is {result}",
+            _ => $"{message}Credit score > 100"
         };
     }
 
