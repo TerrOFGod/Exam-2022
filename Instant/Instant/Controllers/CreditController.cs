@@ -2,7 +2,7 @@
 using Instant.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LoansIssuance.Controllers;
+namespace Instant.Controllers;
 
 [ApiController]
 [Route("credit")]
